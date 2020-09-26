@@ -37,7 +37,7 @@
 
 ;;; Commentary:
 ;;;
-;;; This file is extracted from Guix and originally writen by Pierre Neidhardt
+;;; This file is extracted from Guix and originally written by Pierre Neidhardt
 ;;; and Ludovic Courtès.
 ;;;
 ;;; Bindings to the lzlib / liblz API.  Some convenience functions are also
