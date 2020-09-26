@@ -53,10 +53,13 @@
 
 ;;; Code:
 
+(define %liblz-handle
+  (delay (dynamic-link %liblz)))
+
 (define (lzlib-procedure ret name parameters)
   "Return a procedure corresponding to C function NAME in liblz, or #f if
 either lzlib or the function could not be found."
-  (match (false-if-exception (dynamic-func name (dynamic-link %liblz)))
+  (match (false-if-exception (dynamic-func name (force %liblz-handle)))
     ((? pointer? ptr)
      (pointer->procedure ret ptr parameters))
     (#f
