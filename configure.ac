@@ -29,11 +29,21 @@ AC_DEFUN([GUILE_LIBLZ_FILE_NAME], [
   AC_REQUIRE([PKG_PROG_PKG_CONFIG])
   AC_CACHE_CHECK([lzlib's file name],
     [guile_cv_liblz_libdir],
-    [old_LIBS="$LIBS"
-     LIBS="-llz"
-     AC_LINK_IFELSE([AC_LANG_SOURCE([int main () { return LZ_decompress_open(); }])],
-       [guile_cv_liblz_libdir="`ldd conftest$EXEEXT | grep liblz | sed '-es/.*=> \(.*\) .*$/\1/g'`"])
-     LIBS="$old_LIBS"])
+    [if test "$cross_compiling" = yes; then
+       # When cross-compiling, we cannot rely on 'ldd'.  Instead, look
+       # the output of 'ld --verbose', assuming we're using GNU ld.
+       echo 'int main () { return LZ_decompress_open(); }' > conftest.c
+       guile_cv_liblz_libdir="\
+          `$CC conftest.c -o conftest$EXEEXT -llz -Wl,--verbose 2>/dev/null \
+          | grep -E '^/.*/liblz\.(a|so)'`"
+       rm -f conftest.c conftest$EXEEXT
+     else
+       old_LIBS="$LIBS"
+       LIBS="-llz"
+       AC_LINK_IFELSE([AC_LANG_SOURCE([int main () { return LZ_decompress_open(); }])],
+	 [guile_cv_liblz_libdir="`ldd conftest$EXEEXT | grep liblz | sed '-es/.*=> \(.*\) .*$/\1/g'`"])
+       LIBS="$old_LIBS"
+     fi])
   $1="$guile_cv_liblz_libdir"
 ])
 
