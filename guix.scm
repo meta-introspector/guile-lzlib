@@ -13,8 +13,8 @@
 
 (package
   (name "guile-lzlib")
-  (version "0.1")
-  (source "./guile-lzlib-0.1.tar.gz")
+  (version "0.2")
+  (source "./guile-lzlib-0.2.tar.gz")
   (build-system gnu-build-system)
   (arguments `())
   (native-inputs

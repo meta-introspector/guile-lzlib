@@ -1,5 +1,5 @@
-AC_INIT(guile-lzlib, 0.1)
-AC_SUBST(HVERSION, "\"0.1\"")
+AC_INIT(guile-lzlib, 0.2)
+AC_SUBST(HVERSION, "\"0.2\"")
 AC_SUBST(AUTHOR, "\"Mathieu Othacehe\"")
 AC_SUBST(COPYRIGHT, "'(2020)")
 AC_SUBST(LICENSE, gpl3+)

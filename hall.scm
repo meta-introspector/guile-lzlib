@@ -1,7 +1,7 @@
 (hall-description
   (name "lzlib")
   (prefix "guile")
-  (version "0.1")
+  (version "0.2")
   (author "Mathieu Othacehe")
   (copyright (2020))
   (synopsis "")
